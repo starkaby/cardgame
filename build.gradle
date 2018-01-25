@@ -41,6 +41,7 @@ dependencies {
 	compile ("com.querydsl:querydsl-core:$querydslVersion")
 	compile ("com.querydsl:querydsl-apt:$querydslVersion")
 	compile ("com.querydsl:querydsl-jpa:$querydslVersion")
+	compile ("org.apache.commons:commons-lang3:3.5")
 }
 
 /**** QueryDSL Class Generate Script ****/
