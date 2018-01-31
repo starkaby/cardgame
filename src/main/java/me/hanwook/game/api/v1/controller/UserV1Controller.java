@@ -27,7 +27,15 @@ public class UserV1Controller {
      */
     @GetMapping
     public ResponseEntity<UsersResult> findUsers(UsersParam param) {
-        return userService.findUsers(param);
+
+        UsersResult usersResult = userService.findUsers(param);
+
+        // 끝 페이지
+        if(usersResult.getTotalCount() <= (param.getOffset() + param.getSize())) {
+            return new ResponseEntity<>(usersResult, null, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(usersResult, null, HttpStatus.PARTIAL_CONTENT);
     }
 
     /**
@@ -37,7 +45,10 @@ public class UserV1Controller {
      */
     @PostMapping
     public ResponseEntity<UserResult> regist(@RequestBody UserRegistParam param) {
-        return userService.regist(param);
+
+        UserResult userResult = userService.regist(param);
+
+        return ResponseEntity.ok(userResult);
     }
 
     /**
@@ -50,10 +61,6 @@ public class UserV1Controller {
 
         UserResult user = userService.findUser(userId);
 
-        if(user == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>(user, null, HttpStatus.OK);
+        return ResponseEntity.ok(user);
     }
 }
