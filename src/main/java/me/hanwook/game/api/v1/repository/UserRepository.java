@@ -8,5 +8,4 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
  * 사용자
  */
 public interface UserRepository extends JpaRepository<User, Long>, QueryDslPredicateExecutor<User> {
-
 }
